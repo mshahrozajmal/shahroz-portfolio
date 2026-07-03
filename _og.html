@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1200px; height: 630px; overflow: hidden; }
+  body {
+    font-family: "Inter", sans-serif;
+    color: #EAF1F8;
+    background:
+      radial-gradient(ellipse 70% 90% at 88% -10%, rgba(34,211,238,.16), transparent 60%),
+      linear-gradient(160deg, #0C1018 0%, #06090F 70%);
+    position: relative;
+  }
+  .grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(38,55,77,.28) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(38,55,77,.28) 1px, transparent 1px);
+    background-size: 46px 46px;
+    -webkit-mask-image: radial-gradient(ellipse 80% 70% at 30% 0%, #000 20%, transparent 75%);
+  }
+  .wrap { position: relative; display: flex; height: 100%; padding: 60px; gap: 44px; }
+  .left { flex: 1.15; display: flex; flex-direction: column; }
+  .right { flex: .85; display: flex; align-items: center; }
+  .brandrow { display: flex; align-items: center; gap: 16px; }
+  .logo {
+    width: 62px; height: 62px; border-radius: 16px; display: grid; place-items: center;
+    background: linear-gradient(180deg,#22D3EE,#12b9d6); color: #06121a;
+    font-family: "Sora"; font-weight: 800; font-size: 26px;
+  }
+  .name { font-family: "Sora"; font-weight: 700; font-size: 26px; line-height: 1.1; }
+  .role { font-family: "JetBrains Mono"; font-size: 14px; color: #8DA2BC; margin-top: 2px; letter-spacing: .02em; }
+  .eyebrow {
+    font-family: "JetBrains Mono"; font-size: 14px; letter-spacing: .18em; text-transform: uppercase;
+    color: #22D3EE; margin-top: 40px;
+  }
+  h1 { font-family: "Sora"; font-weight: 800; font-size: 60px; line-height: 1.02; margin-top: 18px; letter-spacing: -.02em; }
+  .accent { color: #22D3EE; }
+  .pos { font-family: "Sora"; font-weight: 700; font-size: 24px; margin-top: 20px; }
+  .pos .g { background: linear-gradient(100deg,#22D3EE,#34D399); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .stats { display: flex; gap: 14px; margin-top: auto; }
+  .stat { border: 1px solid #26374D; border-radius: 14px; padding: 14px 18px; background: rgba(255,255,255,.02); }
+  .stat b { font-family: "Sora"; font-weight: 700; font-size: 26px; display: block;
+    background: linear-gradient(100deg,#22D3EE,#34D399); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .stat span { font-size: 13px; color: #8DA2BC; }
+  .url {
+    display: inline-flex; align-items: center; gap: 10px; margin-top: 22px; width: fit-content;
+    font-family: "JetBrains Mono"; font-size: 15px; color: #EAF1F8;
+    border: 1px solid #26374D; border-radius: 999px; padding: 9px 16px; background: rgba(34,211,238,.05);
+  }
+  .dot { width: 9px; height: 9px; border-radius: 50%; background: #34D399; }
+  .term { width: 100%; border: 1px solid #26374D; border-radius: 18px; overflow: hidden;
+    background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
+    box-shadow: 0 40px 90px -50px rgba(34,211,238,.6); }
+  .tbar { display: flex; align-items: center; gap: 8px; padding: 14px 18px; border-bottom: 1px solid #26374D; }
+  .tbar i { width: 12px; height: 12px; border-radius: 50%; display: inline-block; }
+  .tbar span { font-family: "JetBrains Mono"; font-size: 13px; color: #8DA2BC; margin-left: 8px; }
+  .tbody { font-family: "JetBrains Mono"; font-size: 17px; line-height: 2; padding: 22px 22px 26px; }
+  .c-cmd { color: #22D3EE; } .c-out { color: #EAF1F8; } .c-pass { color: #34D399; }
+</style>
+</head>
+<body>
+  <div class="grid"></div>
+  <div class="wrap">
+    <div class="left">
+      <div class="brandrow">
+        <div class="logo">SA</div>
+        <div>
+          <div class="name">Muhammad Shahroz Ajmal</div>
+          <div class="role">Quality Assurance Engineer</div>
+        </div>
+      </div>
+      <div class="eyebrow">Manual, Exploratory, API Testing</div>
+      <h1>I break software<br />before your <span class="accent">users</span> do.</h1>
+      <div class="pos"><span class="g">Different products.</span> Different approach.</div>
+      <div class="stats">
+        <div class="stat"><b>500+</b><span>Defects documented</span></div>
+        <div class="stat"><b>5</b><span>Products shipped</span></div>
+        <div class="stat"><b>10+</b><span>Projects delivered</span></div>
+        <div class="stat"><b>3 yrs</b><span>QA experience</span></div>
+      </div>
+      <div class="url"><span class="dot"></span>mshahrozajmal.github.io/shahroz-portfolio</div>
+    </div>
+    <div class="right">
+      <div class="term">
+        <div class="tbar"><i style="background:#F2616B"></i><i style="background:#F5A524"></i><i style="background:#34D399"></i><span>qa-report.log</span></div>
+        <div class="tbody">
+          <div class="c-cmd">$ run qa-report.log</div>
+          <div class="c-out">defects_found: 500+</div>
+          <div class="c-out">products_tested: 5</div>
+          <div class="c-out">coverage: +40%</div>
+          <div class="c-out">post_release_defects: -30%</div>
+          <div class="c-pass">status: PASSED ✔</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
