@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
 import { nav, profile } from '../data'
 import { useActiveSection, useAnchorScroll } from '../hooks'
 import { QaModeToggle } from '../qalab'
@@ -58,20 +59,28 @@ export default function Nav() {
           </div>
         </nav>
 
-        {open && (
-          <div className="lg:hidden glass absolute left-6 right-6 top-[72px] flex flex-col gap-1 p-3.5 rounded-[20px]">
-            {nav.map((n) => (
-              <a key={n.href} href={n.href} onClick={(e) => go(e, n.href)}
-                className="px-4 py-3 rounded-xl text-[15px] text-ink hover:bg-white/[.04]">
-                {n.label}
+        <AnimatePresence>
+          {open && (
+            <motion.div
+              className="lg:hidden glass absolute left-6 right-6 top-[72px] flex flex-col gap-1 p-3.5 rounded-[20px] origin-top"
+              initial={{ opacity: 0, y: -10, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -10, scale: 0.98 }}
+              transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+            >
+              {nav.map((n) => (
+                <a key={n.href} href={n.href} onClick={(e) => go(e, n.href)}
+                  className="px-4 py-3 rounded-xl text-[15px] text-ink hover:bg-white/[.04]">
+                  {n.label}
+                </a>
+              ))}
+              <a href="#contact" onClick={(e) => go(e, '#contact')} className="btn btn-primary justify-center mt-1">
+                Get in touch
               </a>
-            ))}
-            <a href="#contact" onClick={(e) => go(e, '#contact')} className="btn btn-primary justify-center mt-1">
-              Get in touch
-            </a>
-            <QaModeToggle className="justify-center mt-1" />
-          </div>
-        )}
+              <QaModeToggle className="justify-center mt-1" />
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </header>
   )

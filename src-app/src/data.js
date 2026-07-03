@@ -178,6 +178,8 @@ export const projects = [
       { v: '5', k: 'escrow states' },
     ],
     tags: ['Manual', 'RTM', 'Escrow', 'Regression', 'Bug Life Cycle'],
+    outcome: '99 bugs logged and every test case traced back to its SRS section. All 5 escrow states verified end to end.',
+    outcomeStat: { v: '99', k: 'bugs, full RTM' },
   },
   {
     id: 'visalay',
@@ -193,6 +195,8 @@ export const projects = [
       { v: 'TC_LG_12', k: 'sample case' },
     ],
     tags: ['Exploratory', 'OCR', 'Payments', 'AI Scoring', 'Test Suite'],
+    outcome: 'Reverse-engineered a product that shipped with no docs into a full test suite. TC_LG_12 caught a login-blocking OAuth 505.',
+    outcomeStat: { v: '0', k: 'docs to full suite' },
   },
   {
     id: 'goodnest',
@@ -208,6 +212,8 @@ export const projects = [
       { v: 'API', k: 'platform + mobile' },
     ],
     tags: ['Mobile', 'API Testing', 'Stripe', 'Roles'],
+    outcome: 'Verified 3 Stripe tiers and 3 invite paths across mobile and API, with every test case mapped to a requirement.',
+    outcomeStat: { v: '3x3', k: 'tiers x invite paths' },
   },
   {
     id: 'wxw',
@@ -223,6 +229,8 @@ export const projects = [
       { v: 'Full', k: 'bug life cycle' },
     ],
     tags: ['Regression', 'GitHub', 'Priority Labels', 'Payments'],
+    outcome: 'Ran the full bug life cycle on GitHub across 3 connected apps. Reopened a resolved P1 that still failed for real customers.',
+    outcomeStat: { v: 'P1', k: 'reopened, same day' },
   },
   {
     id: 'wrestlemania',
@@ -237,6 +245,8 @@ export const projects = [
       { v: 'Solo', k: 'built end to end' },
     ],
     tags: ['MERN', 'React', 'Node', 'Personal'],
+    outcome: 'Built end to end on the MERN stack. Shipping the bugs myself made me a sharper, faster tester.',
+    outcomeStat: { v: 'MERN', k: 'built solo, end to end' },
   },
 ]
 

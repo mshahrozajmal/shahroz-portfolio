@@ -1,7 +1,9 @@
+import { useRef, useEffect } from 'react'
 import { profile, heroStats, img } from '../data'
 import { Reveal, Counter } from './ui'
 import Terminal from './Terminal'
 import { useReducedMotion, useAnchorScroll } from '../hooks'
+import { applyParallax } from '../scroll'
 import { QaLabel, BugLabelButton } from '../qalab'
 
 function MailIcon() { return <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3 7 9 6 9-6" /></svg> }
@@ -11,6 +13,11 @@ function InIcon() { return <svg width="15" height="15" viewBox="0 0 24 24" fill=
 export default function Hero() {
   const reduced = useReducedMotion()
   const onAnchor = useAnchorScroll()
+  const portraitRef = useRef(null)
+
+  // Scrubbed parallax on the portrait. The inner layer is oversized (scale 1.15)
+  // so the vertical travel never exposes an edge. No-op under reduced motion.
+  useEffect(() => applyParallax(portraitRef.current, { strength: 46 }), [])
 
   return (
     <section id="top" className="relative pt-[132px] pb-[72px]">
@@ -61,14 +68,16 @@ export default function Hero() {
 
           {/* Right: portrait + signature terminal */}
           <div className="relative order-first lg:order-none">
-            <Reveal delay={220} className="relative rounded-xl2 overflow-hidden border border-line max-w-[440px] mx-auto lg:mx-0 lg:ml-auto">
-              <img
-                src={img('portrait-main.jpg')}
-                width="880" height="1040"
-                alt={`${profile.name}, Quality Assurance Engineer`}
-                className="w-full h-full object-cover aspect-[4/5]"
-                fetchpriority="high"
-              />
+            <Reveal delay={220} className="relative rounded-xl2 overflow-hidden border border-line max-w-[440px] mx-auto lg:mx-0 lg:ml-auto aspect-[4/5]">
+              <div ref={portraitRef} className="absolute inset-0 will-change-transform">
+                <img
+                  src={img('portrait-main.jpg')}
+                  width="880" height="1040"
+                  alt={`${profile.name}, Quality Assurance Engineer`}
+                  className="w-full h-full object-cover scale-[1.15]"
+                  fetchpriority="high"
+                />
+              </div>
               <div className="absolute inset-0" style={{ background: 'linear-gradient(180deg, transparent 55%, rgba(6,9,15,.72))' }} />
             </Reveal>
 

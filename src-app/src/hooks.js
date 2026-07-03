@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
+import { scrollToTarget } from './scroll'
 
 export function useReducedMotion() {
   const [reduced, setReduced] = useState(false)
@@ -88,8 +89,7 @@ export function useAnchorScroll() {
     const el = document.getElementById(href.slice(1))
     if (!el) return
     e.preventDefault()
-    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' })
+    scrollToTarget(el)
     history.replaceState(null, '', href)
   }, [])
 }

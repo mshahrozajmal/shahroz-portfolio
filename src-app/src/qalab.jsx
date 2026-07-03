@@ -10,6 +10,7 @@
 // ============================================================
 import { createContext, useContext, useState, useCallback, useEffect, useRef } from 'react'
 import { useReducedMotion } from './hooks'
+import { scrollToTarget } from './scroll'
 
 const BUG_IDS = ['align', 'label', 'link404']
 
@@ -43,12 +44,10 @@ export function QaLabProvider({ children }) {
   return <QaLabContext.Provider value={value}>{children}</QaLabContext.Provider>
 }
 
-// Smooth in-page scroll that respects reduced motion (self-contained helper).
+// Smooth in-page scroll via the shared Lenis scroller (falls back to native).
 function scrollToId(id) {
-  const el = document.getElementById(id)
-  if (!el) return
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-  el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' })
+  if (!document.getElementById(id)) return
+  scrollToTarget(id)
   history.replaceState(null, '', `#${id}`)
 }
 

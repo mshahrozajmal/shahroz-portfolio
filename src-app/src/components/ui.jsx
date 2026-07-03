@@ -1,17 +1,29 @@
+import { motion, useReducedMotion } from 'framer-motion'
+import { fadeUp, inViewOnce } from '../motion'
 import { useInView, useCountUp } from '../hooks'
 
-// Fade-up reveal; stagger via `delay` (ms). Honors reduced motion through CSS.
-export function Reveal({ children, delay = 0, as: Tag = 'div', className = '', ...rest }) {
-  const [ref, inView] = useInView()
+// Fade-up reveal, now spring/tween-driven by Framer Motion. Same API as before
+// (delay in ms, `as` tag, className) so every existing section upgrades for free.
+// Under reduced motion it renders a plain, static element.
+export function Reveal({ children, delay = 0, as = 'div', className = '', ...rest }) {
+  const reduced = useReducedMotion()
+  if (reduced) {
+    const Tag = as
+    return <Tag className={className} {...rest}>{children}</Tag>
+  }
+  const MotionTag = motion[as] || motion.div
   return (
-    <Tag
-      ref={ref}
-      className={`reveal ${inView ? 'in' : ''} ${className}`}
-      style={{ transitionDelay: `${delay}ms` }}
+    <MotionTag
+      className={className}
+      variants={fadeUp}
+      custom={delay / 1000}
+      initial="hidden"
+      whileInView="show"
+      viewport={inViewOnce}
       {...rest}
     >
       {children}
-    </Tag>
+    </MotionTag>
   )
 }
 

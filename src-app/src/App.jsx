@@ -10,30 +10,35 @@ import Achievements from './components/Achievements'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 import { QaLabProvider, BugChip, BugModal, CiStatusBar } from './qalab'
+import { CaseStudyProvider } from './components/CaseStudyModal'
+import { useSmoothScroll } from './scroll'
 
 export default function App() {
+  useSmoothScroll()
   return (
     <QaLabProvider>
-      <a href="#top" className="skip-link">Skip to content</a>
-      <div className="ambient" aria-hidden="true" />
-      <div className="relative z-[1]">
-        <Nav />
-        <main>
-          <Hero />
-          <Marquee />
-          <About />
-          <Skills />
-          <Metrics />
-          <Experience />
-          <Projects />
-          <Achievements />
-          <Contact />
-        </main>
-        <CiStatusBar />
-        <Footer />
-      </div>
-      <BugChip />
-      <BugModal />
+      <CaseStudyProvider>
+        <a href="#top" className="skip-link">Skip to content</a>
+        <div className="ambient" aria-hidden="true" />
+        <div className="relative z-[1]">
+          <Nav />
+          <main>
+            <Hero />
+            <Marquee />
+            <About />
+            <Skills />
+            <Metrics />
+            <Experience />
+            <Projects />
+            <Achievements />
+            <Contact />
+          </main>
+          <CiStatusBar />
+          <Footer />
+        </div>
+        <BugChip />
+        <BugModal />
+      </CaseStudyProvider>
     </QaLabProvider>
   )
 }
