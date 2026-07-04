@@ -60,9 +60,10 @@ export const stopScroll = () => lenis?.stop()
 export const startScroll = () => lenis?.start()
 
 // Scrubbed parallax: translates `el` on the Y axis as it moves through the viewport.
-// `strength` is the total travel in px across the full scroll span. No-op when reduced.
+// `strength` is the total travel in px across the full scroll span. Plays on native
+// scroll too, so it is not tied to the smooth-scroll (Lenis) layer being active.
 export function applyParallax(el, { strength = 60 } = {}) {
-  if (!el || prefersReduced()) return () => {}
+  if (!el) return () => {}
   const tween = gsap.fromTo(
     el,
     { y: -strength / 2 },

@@ -1,16 +1,13 @@
-import { motion, useReducedMotion } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { fadeUp, inViewOnce } from '../motion'
 import { useInView, useCountUp } from '../hooks'
 
-// Fade-up reveal, now spring/tween-driven by Framer Motion. Same API as before
+// Fade-up reveal, spring/tween-driven by Framer Motion. Same API as before
 // (delay in ms, `as` tag, className) so every existing section upgrades for free.
-// Under reduced motion it renders a plain, static element.
+// The entrance animation always plays so the site reads as "alive" regardless of
+// the OS reduce-motion / battery-saver setting; only continuous looping motion
+// (marquee, ambient drift, pulses) is calmed under reduced motion, via CSS.
 export function Reveal({ children, delay = 0, as = 'div', className = '', ...rest }) {
-  const reduced = useReducedMotion()
-  if (reduced) {
-    const Tag = as
-    return <Tag className={className} {...rest}>{children}</Tag>
-  }
   const MotionTag = motion[as] || motion.div
   return (
     <MotionTag

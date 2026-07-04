@@ -706,18 +706,14 @@ body.qa-on main > section {
 .kanban-card:hover { transform: translateY(-2px); border-color: var(--cyan); }
 .kanban-strip { position: absolute; left: 0; top: 0; bottom: 0; width: 4px; }
 
-/* Reduced motion: everything instant, nothing moving */
+/* Reduced motion: keep entrance + interaction animations so the site still feels
+   alive, and only calm continuous, looping background motion (the parts that can
+   actually bother motion-sensitive viewers). */
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  *, *::before, *::after {
-    animation-duration: .001ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: .001ms !important;
-  }
-  .reveal { opacity: 1 !important; transform: none !important; }
-  .sevbar > span { transform: scaleX(var(--w, 1)) !important; }
-  .timeline-line { transform: scaleY(1) !important; }
+  .ambient::after,
+  .marquee-track,
+  .livedot::after,
+  .ci-dot::after,
+  .node-pulse::after,
   .cursor { animation: none !important; }
-  .qa-tag { opacity: 1 !important; transform: none !important; animation: none !important; }
-  .ci-dot::after { animation: none !important; }
 }

@@ -2,7 +2,7 @@
 // keyboard focus) a full-card overlay reveals the outcome preview and a call to
 // open the case study. Pointer tilt adds depth. The whole card is a button that
 // opens the detail modal. All motion degrades gracefully under reduced motion.
-import { motion, useReducedMotion } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { useTilt } from '../motion'
 import { useInView } from '../hooks'
 import { useCaseStudy } from './CaseStudyModal'
@@ -36,7 +36,6 @@ function Arrow() {
 }
 
 export default function ProjectCard({ p }) {
-  const reduced = useReducedMotion()
   const { open } = useCaseStudy()
   const { rotateX, rotateY, onPointerMove, reset } = useTilt({ max: 6 })
 
@@ -45,7 +44,7 @@ export default function ProjectCard({ p }) {
     if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); activate() }
   }
 
-  const tiltStyle = reduced ? undefined : { rotateX, rotateY, transformPerspective: 900 }
+  const tiltStyle = { rotateX, rotateY, transformPerspective: 900 }
 
   return (
     <motion.article
@@ -54,10 +53,10 @@ export default function ProjectCard({ p }) {
       aria-label={`${p.name}. ${p.category}. Open case study.`}
       onClick={activate}
       onKeyDown={onKeyDown}
-      onPointerMove={reduced ? undefined : onPointerMove}
+      onPointerMove={onPointerMove}
       onPointerLeave={reset}
-      whileHover={reduced ? undefined : { y: -6 }}
-      whileTap={reduced ? undefined : { scale: 0.99 }}
+      whileHover={{ y: -6 }}
+      whileTap={{ scale: 0.99 }}
       style={tiltStyle}
       className={`project-card glass rounded-xl2 p-[28px] h-full border border-line relative overflow-hidden cursor-pointer ${p.featured ? 'md:col-span-2' : ''}`}
     >
