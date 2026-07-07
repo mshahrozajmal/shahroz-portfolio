@@ -42,6 +42,7 @@ export default function Terminal() {
   return (
     <div
       className="glass rounded-xl2 overflow-hidden shadow-[0_30px_80px_-40px_rgba(34,211,238,.5)]"
+      style={{ backdropFilter: 'blur(4px)', WebkitBackdropFilter: 'blur(4px)' }}
       role="img"
       aria-label="QA report terminal. defects found 500 plus. products tested 5. coverage plus 40 percent. post release defects minus 30 percent. status passed."
     >
