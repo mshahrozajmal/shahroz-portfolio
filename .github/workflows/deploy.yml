@@ -1,0 +1,68 @@
+name: Deploy portfolio to GitHub Pages
+
+# New deploy backend (replaces the legacy "Deploy from a branch" pipeline, which
+# had been erroring). This builds the Vite app from src-app/ on every push to
+# main and publishes it through GitHub's official Actions-based Pages deploy.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Least-privilege permissions required by actions/deploy-pages.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Only one deploy at a time; a newer push cancels an in-flight one.
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: src-app/package-lock.json
+
+      - name: Install dependencies
+        working-directory: src-app
+        run: npm ci
+
+      # Build to a clean, self-contained dist/ (base must match the Pages path).
+      - name: Build
+        working-directory: src-app
+        run: npx vite build --base=/shahroz-portfolio/ --outDir dist --emptyOutDir
+
+      # The portrait + OG images live at the repo root and are referenced at the
+      # published root (BASE_URL + name), so copy them alongside the build output.
+      - name: Copy root images into build
+        run: cp portrait-main.jpg portrait-street.jpg portrait-editorial.jpg og-cover.png src-app/dist/
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: src-app/dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
