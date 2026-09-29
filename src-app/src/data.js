@@ -116,6 +116,7 @@ export const experience = [
     period: 'Sep 2025 to Present',
     place: 'Lahore, On-site',
     active: true,
+    featured: true,
     bullets: [
       'I write the test plan, strategy, scenarios, and detailed test cases for each product release, then run manual functional, regression, smoke, and sanity cycles across the whole cycle.',
       'Documented 100+ defects and applied static and dynamic testing, with every test case traced back to product documentation.',
@@ -137,17 +138,6 @@ export const experience = [
       'Owned the Jesy project end to end: 99 bugs logged across escrow payments, roles, bulk invites, and audit logs, with every test case traced to its SRS section.',
       'Ran WXW Delivery Delight across 3 connected apps on the full GitHub bug life cycle with P1, P2, and P3 labels, reopening resolved tickets that still failed for real customers.',
       'Reported daily on Trello, logged issues on GitHub, and produced monthly bug and enhancement reports that lifted usability recommendations by about 20%.',
-    ],
-  },
-  {
-    role: 'UI/UX Designer, Freelance',
-    company: 'Lafacil Solutions',
-    period: 'Jul 2023 to Jul 2024',
-    place: 'Remote',
-    active: false,
-    bullets: [
-      'Designed web and mobile interfaces in Figma and Framer for client products.',
-      'This is where I learned to read a product the way its designers and builders do, which sharpens how I test.',
     ],
   },
   {

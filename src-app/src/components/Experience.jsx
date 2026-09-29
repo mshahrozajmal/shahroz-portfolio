@@ -4,30 +4,54 @@ import { useInView } from '../hooks'
 import { QaLabel } from '../qalab'
 
 function Item({ job }) {
+  const f = job.featured
   return (
     <div className="relative pb-10 last:pb-0">
       <span
-        className={`absolute -left-[34px] top-1.5 w-4 h-4 rounded-full grid place-items-center ${job.active ? 'node-pulse' : ''}`}
+        className={`absolute -left-[34px] top-1.5 w-4 h-4 rounded-full grid place-items-center ${job.active ? 'node-pulse' : ''} ${f ? 'scale-125' : ''}`}
         style={{ background: job.active ? 'var(--cyan)' : 'var(--card)', border: '2px solid var(--cyan)', boxShadow: '0 0 0 4px var(--bg2)' }}
         aria-hidden="true"
       />
-      <Reveal className="glass rounded-xl2 p-[24px] border border-line">
+      <Reveal
+        className={`glass rounded-xl2 border ${f ? 'p-7 lg:p-9 border-cyan/45' : 'p-[24px] border-line'}`}
+        style={f ? { boxShadow: '0 30px 60px -34px rgba(34,211,238,.6)' } : undefined}
+      >
         <div className="flex flex-wrap justify-between items-baseline gap-2 mb-1">
-          <h3 className="font-display text-[18.5px] font-semibold">
+          <h3 className={`font-display font-semibold ${f ? 'text-[21px] lg:text-[24px] leading-tight' : 'text-[18.5px]'}`}>
             {job.role} <span className="text-cyan">at {job.company}</span>
           </h3>
-          <span className="font-mono text-[12px] text-slate px-3 py-1 rounded-full border border-line whitespace-nowrap">{job.period}</span>
+          <span
+            className={`font-mono rounded-full border whitespace-nowrap ${
+              f
+                ? 'text-[13px] text-cyan border-cyan/40 px-4 py-1.5'
+                : 'text-[12px] text-slate px-3 py-1 border-line'
+            }`}
+          >
+            {job.period}
+          </span>
         </div>
-        <div className="font-mono text-[12px] text-slate mb-4 flex items-center gap-2 flex-wrap">
+        <div className={`font-mono text-slate mb-4 flex items-center gap-2 flex-wrap ${f ? 'text-[13px]' : 'text-[12px]'}`}>
           <span>{job.place}</span>
           {job.active && (
-            <span className="text-cyan px-2 py-[2px] rounded-full border border-cyan/40" style={{ background: 'rgba(34,211,238,.06)' }}>current role</span>
+            <span
+              className={`text-cyan rounded-full border border-cyan/40 ${f ? 'px-3 py-[3px] text-[12.5px]' : 'px-2 py-[2px]'}`}
+              style={{ background: 'rgba(34,211,238,.06)' }}
+            >
+              current role
+            </span>
           )}
         </div>
-        <ul className="grid gap-2.5">
+        <ul className={`grid ${f ? 'gap-3' : 'gap-2.5'}`}>
           {job.bullets.map((b, i) => (
-            <li key={i} className="relative pl-6 text-[14.5px] text-slate leading-relaxed">
-              <span className="absolute left-0 top-[9px] w-2 h-2 rounded-sm" style={{ background: 'var(--cyan)' }} aria-hidden="true" />
+            <li
+              key={i}
+              className={`relative pl-6 text-slate leading-relaxed ${f ? 'text-[15.5px]' : 'text-[14.5px]'}`}
+            >
+              <span
+                className={`absolute left-0 rounded-sm ${f ? 'top-[10px] w-2.5 h-2.5' : 'top-[9px] w-2 h-2'}`}
+                style={{ background: 'var(--cyan)' }}
+                aria-hidden="true"
+              />
               {b}
             </li>
           ))}
