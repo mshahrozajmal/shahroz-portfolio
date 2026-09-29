@@ -13,7 +13,7 @@ function Item({ job }) {
         aria-hidden="true"
       />
       <Reveal
-        className={`glass rounded-xl2 border ${f ? 'p-7 lg:p-9 border-cyan/45' : 'p-[24px] border-line'}`}
+        className={`glass card-lift rounded-xl2 border ${f ? 'p-7 lg:p-9 border-cyan/45' : 'p-[24px] border-line'}`}
         style={f ? { boxShadow: '0 30px 60px -34px rgba(34,211,238,.6)' } : undefined}
       >
         <div className="flex flex-wrap justify-between items-baseline gap-2 mb-1">

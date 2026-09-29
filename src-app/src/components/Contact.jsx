@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { contact, profile, img } from '../data'
 import { Reveal } from './ui'
 import { QaLabel } from '../qalab'
@@ -7,6 +8,26 @@ function Phone() { return <svg width="16" height="16" viewBox="0 0 24 24" fill="
 function In() { return <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M6.94 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0ZM3.5 8.5h3.9V21H3.5V8.5Zm6.2 0h3.7v1.7h.05c.5-.9 1.8-1.9 3.6-1.9 3.9 0 4.6 2.5 4.6 5.8V21h-3.9v-5.4c0-1.3 0-3-1.8-3s-2.1 1.4-2.1 2.9V21H9.7V8.5Z" /></svg> }
 
 export default function Contact() {
+  const [copied, setCopied] = useState(false)
+
+  const copyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(profile.email)
+    } catch {
+      // Clipboard API blocked (http, permissions): fall back to a hidden field.
+      const ta = document.createElement('textarea')
+      ta.value = profile.email
+      ta.setAttribute('readonly', '')
+      ta.style.cssText = 'position:fixed;left:-9999px'
+      document.body.appendChild(ta)
+      ta.select()
+      try { document.execCommand('copy') } catch { /* no-op */ }
+      document.body.removeChild(ta)
+    }
+    setCopied(true)
+    window.setTimeout(() => setCopied(false), 2000)
+  }
+
   return (
     <section id="contact" className="relative py-[86px]">
       <QaLabel code="TC_LINK_08" label="Verify contact links respond" n={7} />
@@ -40,7 +61,17 @@ export default function Contact() {
                 <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" className="btn btn-ghost"><In /> LinkedIn</a>
               </div>
 
-              <p className="font-mono text-[12.5px] text-slate mt-6">{profile.email}</p>
+              <div className="mt-6 flex items-center gap-3 flex-wrap">
+                <p className="font-mono text-[12.5px] text-slate">{profile.email}</p>
+                <button
+                  type="button"
+                  onClick={copyEmail}
+                  className={`copy-email${copied ? ' done' : ''}`}
+                  aria-label={copied ? 'Email copied to clipboard' : 'Copy email address to clipboard'}
+                >
+                  {copied ? 'Copied' : 'Copy'}
+                </button>
+              </div>
             </div>
           </div>
         </Reveal>

@@ -1,4 +1,5 @@
 import Nav from './components/Nav'
+import ScrollProgress from './components/ScrollProgress'
 import Hero from './components/Hero'
 import Marquee from './components/Marquee'
 import About from './components/About'
@@ -21,6 +22,7 @@ export default function App() {
       <CaseStudyProvider>
         <a href="#top" className="skip-link">Skip to content</a>
         <div className="ambient" aria-hidden="true" />
+        <ScrollProgress />
         <div className="relative z-[1]">
           <Nav />
           <main>

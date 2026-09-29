@@ -279,6 +279,27 @@ body {
   background: rgba(255, 255, 255, .02);
 }
 
+/* One-tap copy for the contact email (clients on phones hate retyping). */
+.copy-email {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-size: 10.5px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 4px 12px;
+  background: rgba(255, 255, 255, .03);
+  cursor: pointer;
+  transition: color .2s var(--ease), border-color .2s var(--ease), background .2s var(--ease);
+}
+.copy-email:hover { color: var(--cyan); border-color: var(--cyan); }
+.copy-email.done {
+  color: var(--green);
+  border-color: var(--green);
+  background: rgba(16, 185, 129, .1);
+}
+
 .navlink {
   position: relative;
   font-size: 14px;
@@ -351,10 +372,13 @@ body.qa-on main > section {
   font-family: "JetBrains Mono", ui-monospace, monospace;
   font-size: 11px;
   line-height: 1;
-  color: var(--cyan);
-  background: rgba(6, 12, 20, .82);
-  border: 1px solid rgba(34, 211, 238, .45);
+  /* Fixed (non-theme) palette: the chip always sits on its own dark slab,
+     so Daylight's light text colours would wash out here. */
+  color: #67E8F9;
+  background: rgba(8, 13, 22, .96);
+  border: 1px solid rgba(34, 211, 238, .55);
   border-radius: 8px;
+  box-shadow: 0 10px 26px -12px rgba(2, 6, 23, .75), inset 0 1px 0 rgba(255, 255, 255, .06);
   backdrop-filter: blur(6px);
   white-space: nowrap;
   overflow: hidden;
@@ -366,10 +390,10 @@ body.qa-on main > section {
   pointer-events: none;
 }
 @keyframes qaTagIn { to { opacity: 1; transform: none; } }
-.qa-tag-code { color: var(--cyan); font-weight: 600; }
-.qa-tag-desc { color: var(--slate); }
-.qa-tag-pass { color: var(--green); font-weight: 600; }
-.qa-tag-pass::before { content: "... "; color: var(--slate); }
+.qa-tag-code { color: #67E8F9; font-weight: 600; }
+.qa-tag-desc { color: #C4D4E4; }
+.qa-tag-pass { color: #6EE7B7; font-weight: 600; }
+.qa-tag-pass::before { content: "... "; color: #8FA5BC; }
 @media (max-width: 640px) {
   .qa-tag { top: 8px; right: 8px; font-size: 10px; gap: 6px; }
   .qa-tag-desc { display: none; }             /* collapse to a badge on mobile */
@@ -843,6 +867,20 @@ body.qa-on main > section {
   color: transparent;
 }
 
+/* Reading progress: sits on the very top edge, above the fixed nav pill. */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0;
+  z-index: 260;
+  pointer-events: none;
+  background: linear-gradient(90deg, var(--cyan), var(--green));
+  box-shadow: 0 0 10px rgba(34, 211, 238, .55);
+  transition: width .12s linear;
+}
+
 /* Hero section subtle gradient overlay */
 .hero-bg {
   position: absolute;
@@ -859,8 +897,9 @@ body.qa-on main > section {
    an always-dark overlay must not inherit the light palette's ink colour.
    ============================================================ */
 [data-theme="light"] .glass {
-  background: rgba(255, 255, 255, .74);
-  box-shadow: 0 18px 44px -30px rgba(15, 23, 42, .5);
+  background: rgba(255, 255, 255, .88);
+  border-color: #E7EEF6;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, .05), 0 18px 44px -28px rgba(15, 23, 42, .45);
 }
 [data-theme="light"] .btn-ghost,
 [data-theme="light"] .chip,
@@ -872,9 +911,59 @@ body.qa-on main > section {
 [data-theme="light"] .gh-thread,
 [data-theme="light"] .kanban-col,
 [data-theme="light"] .kanban-count {
-  background: rgba(15, 23, 42, .035);
+  background: rgba(15, 23, 42, .05);
+  border-color: #DCE5EF;
 }
-[data-theme="light"] .pc-hint { background: rgba(255, 255, 255, .9); }
+[data-theme="light"] .btn-ghost:hover {
+  background: rgba(6, 182, 212, .1);
+  border-color: #7DD3E8;
+}
+/* The list above sets a neutral border; re-state the active/hover accents
+   so those states still read as "on". */
+[data-theme="light"] .qa-toggle:hover,
+[data-theme="light"] .theme-toggle:hover {
+  color: var(--ink);
+  border-color: #7DD3E8;
+}
+[data-theme="light"] .qa-toggle.on,
+[data-theme="light"] .theme-toggle.dark {
+  background: rgba(6, 182, 212, .1);
+  border-color: var(--cyan);
+  box-shadow: 0 0 0 1px rgba(6, 182, 212, .35), 0 0 18px -8px rgba(6, 182, 212, .8);
+}
+[data-theme="light"] .btn-primary { box-shadow: 0 10px 26px -10px rgba(6, 182, 212, .8); }
+/* Hover elevation: `[data-theme] .glass` sits later in the file than the
+   base hover rules, so Daylight restates them at a higher specificity. */
+[data-theme="light"] .card-lift:hover,
+[data-theme="light"] .card-lift:focus-within,
+[data-theme="light"] .project-card:hover,
+[data-theme="light"] .project-card:focus-within {
+  border-color: var(--cyan);
+  box-shadow: 0 24px 64px -26px rgba(6, 182, 212, .5), 0 18px 44px -30px rgba(15, 23, 42, .4);
+}
+/* Accent text sits on white in Daylight: the bright cyan is a fill/border
+   colour, not a text colour — use the darker step so copy stays legible. */
+[data-theme="light"] .eyebrow {
+  color: #0E7490;
+  border-color: #CBE8F1;
+  background: rgba(6, 182, 212, .09);
+}
+[data-theme="light"] .text-cyan,
+[data-theme="light"] .qa-toggle.on .qa-toggle-state,
+[data-theme="light"] .theme-toggle-icon { color: #0E7490; }
+[data-theme="light"] .copy-email {
+  background: rgba(15, 23, 42, .05);
+  border-color: #DCE5EF;
+}
+[data-theme="light"] .copy-email:hover {
+  color: #0E7490;
+  border-color: #7DD3E8;
+}
+[data-theme="light"] .grad-text {
+  background-image: linear-gradient(125deg, #0E7490 0%, #0891B2 52%, #059669 100%);
+}
+[data-theme="light"] body.qa-on main > section { outline-color: rgba(8, 145, 178, .65); }
+[data-theme="light"] .pc-hint { background: rgba(255, 255, 255, .94); }
 [data-theme="light"] .bug-chip {
   background: rgba(255, 255, 255, .94);
   box-shadow: 0 18px 44px -26px rgba(15, 23, 42, .45);
