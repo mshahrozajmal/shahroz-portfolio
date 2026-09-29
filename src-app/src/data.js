@@ -20,7 +20,7 @@ export const profile = {
     'Quality Assurance Engineer | 500+ Defects Caught Across 5 Shipped Products | Manual, Exploratory & API Testing (Postman) | Requirement Traceability | Growing into Automation',
   positioning: 'Different products. Different approach.',
   intro:
-    'I break software before your users do. I am a QA engineer with three years in manual, exploratory, and API testing. I catch defects early, write bug reports developers can act on, and validate AI and LLM features across Agile teams.',
+    'I break software before your users do. I am a QA engineer with two years in manual, exploratory, and API testing. I catch defects early, write bug reports developers can act on, and validate AI and LLM features across Agile teams.',
 }
 
 export const nav = [
@@ -43,7 +43,7 @@ export const terminalLines = [
 ]
 
 export const heroStats = [
-  { value: 3, suffix: '', label: 'Years in QA' },
+  { value: 2, suffix: '', label: 'Years in QA' },
   { value: 5, suffix: '', label: 'Products shipped' },
   { value: 500, suffix: '+', label: 'Defects documented' },
   { value: 10, suffix: '+', label: 'Projects delivered' },
@@ -58,7 +58,7 @@ export const marquee = [
 export const about = {
   heading: 'Quality is not a stage at the end. It is how I work from the first sprint.',
   paras: [
-    'I am a Quality Assurance Engineer based in Lahore with three years of hands-on testing. My day to day is test planning, scenario and test-case design, black-box and functional testing, defect reporting, and mapping test cases back to requirements in Agile and Scrum teams.',
+    'I am a Quality Assurance Engineer based in Lahore with two years of hands-on testing. My day to day is test planning, scenario and test-case design, black-box and functional testing, defect reporting, and mapping test cases back to requirements in Agile and Scrum teams.',
     'Across 10+ projects I have handled four to five concurrent international client accounts and documented 500+ defects. I move fast when I need to. I tested a full product in about two weeks and cleared four products in a month and a half. Every product I tested shipped to production.',
     'I also come from UI/UX and requirement engineering, with MERN basics. I test products the way their makers design and build them.',
   ],
@@ -112,30 +112,31 @@ export const metrics = [
 export const experience = [
   {
     role: 'Quality Assurance Engineer',
-    company: 'LeapSoft',
-    period: 'May 2024 to Present',
+    company: 'Code19',
+    period: 'Sep 2025 to Present',
     place: 'Lahore, On-site',
     active: true,
     bullets: [
-      'I run QA for four to five international client products at once, using black-box, functional, regression, and user-flow testing to keep releases on schedule.',
-      'Documented 400+ defects across four products with clear, reproducible bug reports, cutting post-release defects by about 30%.',
-      'Test AI and LLM features by checking model responses, prompt handling, and output accuracy, improving response reliability by about 25%.',
-      'Wrote module and feature-wise test cases and scenarios, raising test coverage by about 40%.',
-      'Report daily on Trello, log issues on GitHub, and send enhancement recommendations that improved usability by about 20%.',
-      'Produce monthly bug and enhancement reports and keep test cases mapped to requirements for change control.',
+      'I write the test plan, strategy, scenarios, and detailed test cases for each product release, then run manual functional, regression, smoke, and sanity cycles across the whole cycle.',
+      'Documented 100+ defects and applied static and dynamic testing, with every test case traced back to product documentation.',
+      'Tightened regression coverage around the flows that break most often, which surfaced defects about 35% sooner.',
+      'Joined daily scrums and sprint planning with developers and the wider team, and I keep the report in the same language the team ships in.',
     ],
   },
   {
     role: 'Quality Assurance Engineer',
-    company: 'Code19',
-    period: 'Jul 2023 to Apr 2024',
-    place: 'Lahore, On-site',
+    company: 'LeapSoft',
+    period: 'Mar 2025 to Aug 2025',
+    place: 'Lahore, On-site (6 months, project based)',
     active: false,
     bullets: [
-      'Wrote test plans, strategies, scenarios, and detailed test cases for multiple product releases.',
-      'Ran manual functional, regression, smoke, and sanity testing across release cycles, improving defect detection by about 35%.',
-      'Documented 100+ defects and applied static and dynamic testing, with test cases traced to product documentation.',
-      'Joined daily scrums and sprint planning with developers and the wider team.',
+      'Six months on site running QA for four to five international client products at once, using black-box, functional, regression, and user-flow testing to keep releases on schedule.',
+      'Documented 400+ defects with reproducible steps, actual versus expected results, and severity priority, cutting post-release defects by about 30%.',
+      'Wrote module and feature-wise test cases mapped into an RTM, raising test coverage by about 40% and giving change control a real baseline.',
+      'Tested AI and LLM features across model responses, prompt handling, and output accuracy, improving response reliability by about 25%.',
+      'Owned the Jesy project end to end: 99 bugs logged across escrow payments, roles, bulk invites, and audit logs, with every test case traced to its SRS section.',
+      'Ran WXW Delivery Delight across 3 connected apps on the full GitHub bug life cycle with P1, P2, and P3 labels, reopening resolved tickets that still failed for real customers.',
+      'Reported daily on Trello, logged issues on GitHub, and produced monthly bug and enhancement reports that lifted usability recommendations by about 20%.',
     ],
   },
   {
@@ -150,15 +151,39 @@ export const experience = [
     ],
   },
   {
-    role: 'Requirement Engineer, Internship',
+    role: 'Software Quality Assurance Internship',
     company: 'Roche',
-    period: 'Oct 2021 to Jan 2022',
-    place: 'Bulgaria, Hybrid',
+    period: 'Sep 2023 to Feb 2024',
+    place: 'Bulgaria, Hybrid (6 months, 7 Sep 2023 to 21 Feb 2024)',
     active: false,
     bullets: [
-      'Gathered and documented functional and non-functional requirements and wrote SRS documentation.',
-      'First real exposure to how clear requirements make a product testable.',
+      'Gathered and documented functional and non-functional requirements and wrote the SRS the product was built and tested against.',
+      'Turned those requirements into test scenarios and test cases, my first real run at requirement traceability end to end.',
+      'First real exposure to how clear requirements decide whether a product can be tested at all, the rule I still work by.',
     ],
+  },
+]
+
+// Freelance requirement-engineering and design work, kept out of the job
+// timeline and shown as an additional section instead.
+export const additionalWork = [
+  {
+    title: 'Requirement engineering',
+    kind: 'Freelance',
+    paras: [
+      'I take loose product ideas and turn them into documents a team can build from: functional and non-functional requirements, acceptance criteria, edge cases, and scope boundaries.',
+      'Requirements and test cases are written against each other, so traceability and change control start before the first sprint instead of after the first bug.',
+    ],
+    items: ['SRS documentation', 'FR and NFR', 'Acceptance criteria', 'Traceability', 'Stakeholder notes', 'Change control'],
+  },
+  {
+    title: 'UI and UX design',
+    kind: 'Freelance',
+    paras: [
+      'Wireframes to handoff-ready screens in Figma and Framer, with spacing, states, empty states, and error paths specified rather than left for someone to guess.',
+      'Designing a product first makes me a sharper tester: I know what the screen promised, so I know exactly when it breaks.',
+    ],
+    items: ['Figma', 'Framer', 'Wireframes', 'Design systems', 'Prototypes', 'Dev handoff'],
   },
 ]
 

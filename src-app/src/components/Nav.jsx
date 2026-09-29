@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { nav, profile } from '../data'
 import { useActiveSection, useAnchorScroll } from '../hooks'
 import { QaModeToggle } from '../qalab'
+import { ThemeToggle } from '../theme'
 
 const ids = nav.map((n) => n.href.slice(1))
 
@@ -31,7 +32,7 @@ export default function Nav() {
             </span>
           </a>
 
-          <div className="hidden lg:flex items-center gap-6">
+          <div className="hidden lg:flex items-center gap-5">
             {nav.map((n) => (
               <a key={n.href} href={n.href} onClick={(e) => go(e, n.href)}
                 className={`navlink ${active === n.href.slice(1) ? 'active' : ''}`}>
@@ -40,11 +41,16 @@ export default function Nav() {
             ))}
           </div>
 
-          <div className="flex items-center gap-2">
-            <QaModeToggle className="hidden lg:inline-flex" />
-            <a href="#contact" onClick={(e) => go(e, '#contact')} className="btn btn-primary hidden lg:inline-flex text-[14px] py-2.5">
+          {/* Desktop actions live in one wrapper so their own display rules
+              never fight Tailwind's `hidden` below lg. */}
+          <div className="hidden lg:flex items-center gap-2">
+            <ThemeToggle className="theme-toggle-desktop" />
+            <QaModeToggle />
+            <a href="#contact" onClick={(e) => go(e, '#contact')} className="btn btn-primary text-[14px] py-2.5">
               Get in touch
             </a>
+          </div>
+          <div className="flex items-center gap-2">
             <button
               className="lg:hidden grid place-items-center w-[42px] h-[42px] rounded-full border border-line text-ink"
               aria-label={open ? 'Close navigation menu' : 'Open navigation menu'}
@@ -70,14 +76,17 @@ export default function Nav() {
             >
               {nav.map((n) => (
                 <a key={n.href} href={n.href} onClick={(e) => go(e, n.href)}
-                  className="px-4 py-3 rounded-xl text-[15px] text-ink hover:bg-white/[.04]">
+                  className="menulink px-4 py-3 rounded-xl text-[15px] text-ink">
                   {n.label}
                 </a>
               ))}
               <a href="#contact" onClick={(e) => go(e, '#contact')} className="btn btn-primary justify-center mt-1">
                 Get in touch
               </a>
-              <QaModeToggle className="justify-center mt-1" />
+              <div className="flex items-center justify-center gap-2 mt-1">
+                <ThemeToggle />
+                <QaModeToggle />
+              </div>
             </motion.div>
           )}
         </AnimatePresence>

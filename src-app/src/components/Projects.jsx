@@ -22,6 +22,9 @@ export default function Projects() {
           ))}
         </div>
       </div>
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-xs text-slate/60 opacity-0 md:opacity-100 transition-opacity duration-500">
+        Scroll with mouse wheel or touchpad to view more projects
+      </div>
     </section>
   )
 }

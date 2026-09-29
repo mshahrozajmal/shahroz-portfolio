@@ -2,7 +2,40 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
+/* ============================================================
+   THEME: Daylight is the default mode, Midnight is the optional dark palette.
+   The <html> element always carries data-theme (light or dark); the :root
+   block below is the no-JS fallback so the page still opens in Daylight.
+   ============================================================ */
+:root, [data-theme="light"] {
+  --bg1: #F8FAFC;
+  --bg2: #FFFFFF;
+  --cyan: #06B6D4;
+  --green: #10B981;
+  --ink: #0F172A;
+  --slate: #475569;
+  --card: #FFFFFF;
+  --line: #E2E8F0;
+  --crit: #EF4444;
+  --high: #F59E0B;
+  --med: #06B6D4;
+  --ease: cubic-bezier(.22, 1, .36, 1);
+  /* RGB triplets feed the Tailwind palette (see tailwind.config.js) */
+  --bg1-rgb: 248 250 252;
+  --bg2-rgb: 255 255 255;
+  --cyan-rgb: 6 182 212;
+  --green-rgb: 16 185 129;
+  --ink-rgb: 15 23 42;
+  --slate-rgb: 71 85 105;
+  --card-rgb: 255 255 255;
+  --line-rgb: 226 232 240;
+  --crit-rgb: 239 68 68;
+  --high-rgb: 245 158 11;
+  --med-rgb: 6 182 212;
+}
+
+/* Midnight (dark) mode */
+[data-theme="dark"] {
   --bg1: #0C1018;
   --bg2: #06090F;
   --cyan: #22D3EE;
@@ -15,11 +48,27 @@
   --high: #F5A524;
   --med: #22D3EE;
   --ease: cubic-bezier(.22, 1, .36, 1);
+  --bg1-rgb: 12 16 24;
+  --bg2-rgb: 6 9 15;
+  --cyan-rgb: 34 211 238;
+  --green-rgb: 52 211 153;
+  --ink-rgb: 234 241 248;
+  --slate-rgb: 141 162 188;
+  --card-rgb: 17 24 38;
+  --line-rgb: 38 55 77;
+  --crit-rgb: 242 97 107;
+  --high-rgb: 245 165 36;
+  --med-rgb: 34 211 238;
 }
 
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 90px;
+}
+/* Lenis owns the scroll while it is running; leaving both smooth behaviours
+   active double-eases the wheel and behaves differently per browser/device. */
+html.lenis {
+  scroll-behavior: auto;
 }
 
 body {
@@ -30,6 +79,7 @@ body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
+  transition: background 0.3s var(--ease), color 0.3s var(--ease);
 }
 
 ::selection {
@@ -45,6 +95,7 @@ body {
   pointer-events: none;
   background:
     linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 60%, var(--bg2) 100%);
+  transition: background 0.3s var(--ease);
 }
 .ambient::before {
   content: "";
@@ -57,6 +108,10 @@ body {
   mask-image: radial-gradient(ellipse 90% 60% at 50% 0%, #000 30%, transparent 78%);
   -webkit-mask-image: radial-gradient(ellipse 90% 60% at 50% 0%, #000 30%, transparent 78%);
   opacity: .6;
+  transition: opacity 0.3s var(--ease);
+}
+[data-theme="dark"] .ambient::before {
+  opacity: .4;
 }
 .ambient::after {
   content: "";
@@ -72,6 +127,9 @@ body {
   transform: translate(-50%, 0);
   animation: drift 22s ease-in-out infinite alternate;
   will-change: transform;
+}
+[data-theme="light"] .ambient::after {
+  background: radial-gradient(circle, rgba(6, 182, 212, .12) 0%, rgba(6, 182, 212, .04) 40%, transparent 68%);
 }
 
 @keyframes drift {
@@ -318,6 +376,18 @@ body.qa-on main > section {
   .qa-tag-pass::before { content: ""; }
 }
 
+/* First section: the fixed top bar sits over the top of #top, so its test
+   annotation is pushed below the bar (and above it in stacking order) instead
+   of hiding behind it. */
+#top .qa-tag {
+  top: 92px;
+  right: 24px;
+  z-index: 110;
+}
+@media (max-width: 640px) {
+  #top .qa-tag { top: 84px; right: 12px; }
+}
+
 /* QA Mode toggle (nav) */
 .qa-toggle {
   display: inline-flex;
@@ -349,6 +419,43 @@ body.qa-on main > section {
   font-size: 10.5px; letter-spacing: .1em; color: var(--slate);
 }
 .qa-toggle.on .qa-toggle-state { color: var(--cyan); }
+
+/* Daylight / Midnight theme toggle (nav) */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--slate);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 7px 12px;
+  background: rgba(255, 255, 255, .02);
+  transition: color .25s var(--ease), border-color .25s var(--ease), box-shadow .25s var(--ease);
+}
+.theme-toggle:hover {
+  color: var(--ink);
+  border-color: rgba(34, 211, 238, .5);
+}
+.theme-toggle.dark {
+  color: var(--ink);
+  border-color: var(--cyan);
+  box-shadow: 0 0 0 1px rgba(34, 211, 238, .35), 0 0 18px -6px rgba(34, 211, 238, .7);
+}
+.theme-toggle-icon {
+  display: inline-flex;
+  color: var(--cyan);
+}
+/* The desktop nav is dense between 1024 and 1280: keep the pill icon-only
+   there, and show the mode name once there is room for it. */
+@media (max-width: 1279.98px) {
+  .theme-toggle-desktop .theme-toggle-label { display: none; }
+}
+
+/* Mobile menu links (Daylight needs its own hover surface) */
+.menulink { transition: background .2s var(--ease); }
+.menulink:hover { background: rgba(34, 211, 238, .08); }
 
 /* 4.2 BUG HUNT: misaligned word, counter chip, completion, self-report modal */
 .misword {
@@ -705,6 +812,87 @@ body.qa-on main > section {
 }
 .kanban-card:hover { transform: translateY(-2px); border-color: var(--cyan); }
 .kanban-strip { position: absolute; left: 0; top: 0; bottom: 0; width: 4px; }
+
+/* Projects section scrollbar for mouse / touchpad */
+#work .grid {
+  scrollbar-width: thin;
+  scrollbar-color: var(--line) transparent;
+}
+#work .grid::-webkit-scrollbar {
+  width: 8px;
+}
+#work .grid::-webkit-scrollbar-thumb {
+  background: var(--line);
+  border-radius: 8px;
+  border: 3px solid transparent;
+  background-clip: content-box;
+}
+
+/* Professional color accents for project cards.
+   background-image only: the `background` shorthand would reset
+   background-clip and paint a solid box instead of gradient text. */
+.project-card .grad-text {
+  background-image: linear-gradient(135deg, var(--cyan) 0%, var(--green) 100%);
+}
+
+/* Stat tile gradient text */
+.grad-text {
+  background: linear-gradient(135deg, var(--cyan) 0%, #7de9f6 45%, var(--green) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Hero section subtle gradient overlay */
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: 30px 30px 0 0;
+  background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(34, 211, 238, .18), transparent);
+  will-change: transform;
+}
+
+/* ============================================================
+   DAYLIGHT MODE POLISH
+   Translucent white surfaces disappear on a white page, and text that sits on
+   an always-dark overlay must not inherit the light palette's ink colour.
+   ============================================================ */
+[data-theme="light"] .glass {
+  background: rgba(255, 255, 255, .74);
+  box-shadow: 0 18px 44px -30px rgba(15, 23, 42, .5);
+}
+[data-theme="light"] .btn-ghost,
+[data-theme="light"] .chip,
+[data-theme="light"] .qa-toggle,
+[data-theme="light"] .theme-toggle,
+[data-theme="light"] .cs-close,
+[data-theme="light"] .cs-header,
+[data-theme="light"] .cs-kv,
+[data-theme="light"] .gh-thread,
+[data-theme="light"] .kanban-col,
+[data-theme="light"] .kanban-count {
+  background: rgba(15, 23, 42, .035);
+}
+[data-theme="light"] .pc-hint { background: rgba(255, 255, 255, .9); }
+[data-theme="light"] .bug-chip {
+  background: rgba(255, 255, 255, .94);
+  box-shadow: 0 18px 44px -26px rgba(15, 23, 42, .45);
+}
+[data-theme="light"] .cs-panel {
+  background: linear-gradient(180deg, #ffffff, #f6f9fc);
+  box-shadow: 0 50px 130px -40px rgba(15, 23, 42, .4);
+}
+[data-theme="light"] .cs-table th { background: rgba(15, 23, 42, .03); }
+[data-theme="light"] .cs-table td { border-bottom-color: rgba(38, 55, 77, .16); }
+[data-theme="light"] .cs-commit { border-bottom-color: rgba(38, 55, 77, .16); }
+[data-theme="light"] .cs-meter,
+[data-theme="light"] .cs-defbar { background: rgba(15, 23, 42, .07); }
+
+/* Text that always sits on a dark overlay (project card hover reveal) */
+.card-reveal .pc-outcome { color: #EAF1F8; }
+.card-reveal .pc-outcome-eyebrow { color: #22D3EE; }
+.card-reveal .pc-outcome-stat { color: #8DA2BC; }
 
 /* Reduced motion: keep entrance + interaction animations so the site still feels
    alive, and only calm continuous, looping background motion (the parts that can

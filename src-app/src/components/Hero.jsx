@@ -19,10 +19,14 @@ export default function Hero() {
   // so the vertical travel never exposes an edge. No-op under reduced motion.
   useEffect(() => applyParallax(portraitRef.current, { strength: 46 }), [])
 
+  // Subtle pulse animation on the portrait border for attention
+  const pulse = reduced ? 0 : 1
+
   return (
     <section id="top" className="relative pt-[132px] pb-[72px]">
       <QaLabel code="TC_HERO_01" label="Verify identity and hero tagline render" n={0} />
       <div className="shell relative z-[1]">
+        <div className="hero-bg absolute -inset-0 -mx-20 -my-20 rounded-3xl opacity-5 transform rotate-1/2 overflow-hidden" aria-hidden="true" />
         <div className="grid lg:grid-cols-[1.05fr_.95fr] gap-[46px] items-center">
           {/* Left: copy */}
           <div>
@@ -74,7 +78,7 @@ export default function Hero() {
                   src={img('portrait-main.jpg')}
                   width="880" height="1040"
                   alt={`${profile.name}, Quality Assurance Engineer`}
-                  className="w-full h-full object-cover scale-[1.15]"
+                  className={`w-full h-full object-cover scale-[1.15] transition-transform ${pulse > 0 ? 'hover:scale-[1.2]' : ''} ${reduced ? '' : 'duration-300 ease-in-out'}`}
                   fetchpriority="high"
                 />
               </div>

@@ -8,9 +8,9 @@ import { useInView } from '../hooks'
 import { useCaseStudy } from './CaseStudyModal'
 
 const SEV = [
-  { key: 'critical', label: 'Critical', color: '#F2616B' },
-  { key: 'high', label: 'High', color: '#F5A524' },
-  { key: 'medium', label: 'Medium', color: '#22D3EE' },
+  { key: 'critical', label: 'Critical', color: '#F87171' },
+  { key: 'high', label: 'High', color: '#FBBF24' },
+  { key: 'medium', label: 'Medium', color: '#34D399' },
 ]
 
 function SeverityBars({ severity }) {
@@ -21,7 +21,7 @@ function SeverityBars({ severity }) {
       {SEV.map((s) => (
         <div key={s.key} className="flex items-center gap-3">
           <span className="font-mono text-[11px] text-slate w-14 shrink-0">{s.label}</span>
-          <span className={`sevbar ${inView ? 'in' : ''} relative h-2 flex-1 rounded-full overflow-hidden`} style={{ background: 'rgba(255,255,255,.05)' }}>
+          <span className={`sevbar ${inView ? 'in' : ''} relative h-2 flex-1 rounded-full overflow-hidden`} style={{ background: 'var(--line)' }}>
             <span style={{ background: s.color, '--w': severity[s.key] / max }} />
           </span>
           <span className="font-mono text-[12px] w-6 text-right" style={{ color: s.color }}>{severity[s.key]}</span>
@@ -58,10 +58,10 @@ export default function ProjectCard({ p }) {
       whileHover={{ y: -6 }}
       whileTap={{ scale: 0.99 }}
       style={tiltStyle}
-      className={`project-card glass rounded-xl2 p-[28px] h-full border border-line relative overflow-hidden cursor-pointer ${p.featured ? 'md:col-span-2' : ''}`}
+      className={`project-card glass rounded-xl2 p-[28px] h-full border-2 border-line/50 relative overflow-hidden cursor-pointer ${p.featured ? 'md:col-span-2' : ''}`}
     >
       {p.featured && (
-        <span className="absolute top-5 right-5 z-[2] font-mono text-[10.5px] tracking-wide uppercase px-[10px] py-[4px] rounded-full border border-cyan/40 text-cyan" style={{ background: 'rgba(34,211,238,.06)' }}>
+        <span className="absolute top-5 right-5 z-[2] font-mono text-[10.5px] tracking-wide uppercase px-[10px] py-[4px] rounded-full border border-cyan/40 text-cyan bg-cyan/10">
           Featured
         </span>
       )}
@@ -82,7 +82,7 @@ export default function ProjectCard({ p }) {
           {p.severity && <SeverityBars severity={p.severity} />}
           <div className={`grid grid-cols-3 gap-3 ${p.severity ? 'mt-5' : ''}`}>
             {p.stats.map((s) => (
-              <div key={s.k} className="rounded-[13px] border border-line p-3" style={{ background: 'rgba(255,255,255,.015)' }}>
+              <div key={s.k} className="rounded-[13px] border border-line p-3" style={{ background: 'var(--card)' }}>
                 <div className="font-display font-bold text-[17px] grad-text whitespace-nowrap">{s.v}</div>
                 <div className="text-slate text-[11px] mt-1 leading-tight">{s.k}</div>
               </div>

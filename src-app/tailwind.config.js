@@ -4,17 +4,20 @@ export default {
   theme: {
     extend: {
       colors: {
-        bg1: '#0C1018',
-        bg2: '#06090F',
-        cyan: '#22D3EE',
-        green: '#34D399',
-        ink: '#EAF1F8',
-        slate: '#8DA2BC',
-        card: '#111826',
-        line: '#26374D',
-        crit: '#F2616B',
-        high: '#F5A524',
-        med: '#22D3EE',
+        // Palette comes from index.css so every utility follows Daylight /
+        // Midnight. The <alpha-value> placeholder keeps opacity modifiers
+        // (text-ink/90, border-cyan/40) working in both modes.
+        bg1: 'rgb(var(--bg1-rgb) / <alpha-value>)',
+        bg2: 'rgb(var(--bg2-rgb) / <alpha-value>)',
+        cyan: 'rgb(var(--cyan-rgb) / <alpha-value>)',
+        green: 'rgb(var(--green-rgb) / <alpha-value>)',
+        ink: 'rgb(var(--ink-rgb) / <alpha-value>)',
+        slate: 'rgb(var(--slate-rgb) / <alpha-value>)',
+        card: 'rgb(var(--card-rgb) / <alpha-value>)',
+        line: 'rgb(var(--line-rgb) / <alpha-value>)',
+        crit: 'rgb(var(--crit-rgb) / <alpha-value>)',
+        high: 'rgb(var(--high-rgb) / <alpha-value>)',
+        med: 'rgb(var(--med-rgb) / <alpha-value>)',
       },
       fontFamily: {
         display: ['Sora', 'ui-sans-serif', 'system-ui', 'sans-serif'],

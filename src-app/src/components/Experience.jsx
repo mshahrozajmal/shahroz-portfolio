@@ -8,7 +8,7 @@ function Item({ job }) {
     <div className="relative pb-10 last:pb-0">
       <span
         className={`absolute -left-[34px] top-1.5 w-4 h-4 rounded-full grid place-items-center ${job.active ? 'node-pulse' : ''}`}
-        style={{ background: job.active ? '#22D3EE' : '#111826', border: '2px solid #22D3EE', boxShadow: '0 0 0 4px #06090F' }}
+        style={{ background: job.active ? 'var(--cyan)' : 'var(--card)', border: '2px solid var(--cyan)', boxShadow: '0 0 0 4px var(--bg2)' }}
         aria-hidden="true"
       />
       <Reveal className="glass rounded-xl2 p-[24px] border border-line">
@@ -27,7 +27,7 @@ function Item({ job }) {
         <ul className="grid gap-2.5">
           {job.bullets.map((b, i) => (
             <li key={i} className="relative pl-6 text-[14.5px] text-slate leading-relaxed">
-              <span className="absolute left-0 top-[9px] w-2 h-2 rounded-sm" style={{ background: '#22D3EE' }} aria-hidden="true" />
+              <span className="absolute left-0 top-[9px] w-2 h-2 rounded-sm" style={{ background: 'var(--cyan)' }} aria-hidden="true" />
               {b}
             </li>
           ))}
@@ -41,12 +41,12 @@ export default function Experience() {
   const [lineRef, lineIn] = useInView({ threshold: 0.05, rootMargin: '0px 0px -20% 0px' })
   return (
     <section id="experience" className="relative py-[86px]">
-      <QaLabel code="TC_EXP_05" label="Verify experience order LeapSoft to Roche" n={4} />
+      <QaLabel code="TC_EXP_05" label="Verify experience order Code19 to Roche" n={4} />
       <div className="shell">
         <SectionHeading
           eyebrow="Experience"
           title="Where I have shipped quality"
-          sub="Three years testing for international clients, from solo test cycles to running QA across four to five accounts at once."
+          sub="Two years testing for international clients, from solo test cycles to running QA across four to five accounts at once."
         />
 
         <div ref={lineRef} className="relative pl-[34px] mt-12">

@@ -6,7 +6,7 @@ function CheckMarkFree({ i }) {
   // A numbered token, not a check mark, to keep prose symbol-free.
   return (
     <span className="w-[42px] h-[42px] rounded-[12px] grid place-items-center shrink-0 font-mono text-[13px] font-semibold"
-      style={{ background: 'rgba(34,211,238,.08)', border: '1px solid #26374D', color: '#22D3EE' }}>
+      style={{ background: 'rgba(34,211,238,.08)', border: '1px solid var(--line)', color: 'var(--cyan)' }}>
       {String(i + 1).padStart(2, '0')}
     </span>
   )
