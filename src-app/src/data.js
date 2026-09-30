@@ -118,10 +118,11 @@ export const experience = [
     active: true,
     featured: true,
     bullets: [
-      'I write the test plan, strategy, scenarios, and detailed test cases for each product release, then run manual functional, regression, smoke, and sanity cycles across the whole cycle.',
-      'Documented 100+ defects and applied static and dynamic testing, with every test case traced back to product documentation.',
-      'Tightened regression coverage around the flows that break most often, which surfaced defects about 35% sooner.',
-      'Joined daily scrums and sprint planning with developers and the wider team, and I keep the report in the same language the team ships in.',
+      'Own end-to-end QA for every release: test plan, strategy, scenarios, and detailed test cases, then manual functional, regression, smoke, and sanity cycles with every case traced back to product documentation.',
+      'Documented 100+ defects, triaging critical, high, and medium severity bugs with reproducible steps across static and dynamic testing, cutting post-release defects by about 30%.',
+      'Coverage up about 40% and tighter regression surfaced defects about 35% sooner.',
+      'Tested AI and LLM features across model responses, prompt handling, and output accuracy, improving response reliability by about 25%.',
+      'Ran the full GitHub bug life cycle with P1, P2, and P3 labels and reopened a closed defect the same day it still failed for real customers; daily scrums, sprint planning, and monthly reports for stakeholders.',
     ],
   },
   {
@@ -131,13 +132,9 @@ export const experience = [
     place: 'Lahore, On-site (6 months, project based)',
     active: false,
     bullets: [
-      'Six months on site running QA for four to five international client products at once, using black-box, functional, regression, and user-flow testing to keep releases on schedule.',
-      'Documented 400+ defects with reproducible steps, actual versus expected results, and severity priority, cutting post-release defects by about 30%.',
-      'Wrote module and feature-wise test cases mapped into an RTM, raising test coverage by about 40% and giving change control a real baseline.',
-      'Tested AI and LLM features across model responses, prompt handling, and output accuracy, improving response reliability by about 25%.',
-      'Owned the Jesy project end to end: 99 bugs logged across escrow payments, roles, bulk invites, and audit logs, with every test case traced to its SRS section.',
-      'Ran WXW Delivery Delight across 3 connected apps on the full GitHub bug life cycle with P1, P2, and P3 labels, reopening resolved tickets that still failed for real customers.',
-      'Reported daily on Trello, logged issues on GitHub, and produced monthly bug and enhancement reports that lifted usability recommendations by about 20%.',
+      'QA for 4 to 5 concurrent international client products: black-box, functional, regression, and user-flow testing that kept every release on schedule.',
+      'Documented 400+ defects with clear reproduction steps and critical, high, and medium severity priority, mapped module-wise test cases into an RTM used for change control.',
+      'Owned Jesy end to end: 99 bugs (20 critical, 40 high, 39 medium) with every test case traced to its SRS section.',
     ],
   },
   {
